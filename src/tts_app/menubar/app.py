@@ -42,7 +42,10 @@ class MenuBarApp(rumps.App):
     @rumps.clicked("Unload model")
     def _on_unload(self, _sender) -> None:
         self.speaker.unload_model()
-        rumps.notification("tts-app", "", "Model unloaded — next hotkey will reload it.")
+        try:
+            rumps.notification("tts-app", "", "Model unloaded — next hotkey will reload it.")
+        except RuntimeError:
+            log.info("model unloaded (notification suppressed: app not bundled)")
 
     @rumps.clicked("Quit")
     def _on_quit(self, _sender) -> None:
