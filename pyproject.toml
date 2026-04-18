@@ -10,6 +10,7 @@ dependencies = [
     "soundfile>=0.12.1",
     "pynput>=1.8.1",
     "pyperclip>=1.11.0",
+    "misaki[en]>=0.9.4",
 ]
 
 [project.scripts]
