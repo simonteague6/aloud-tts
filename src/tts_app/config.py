@@ -1,0 +1,1 @@
+HOTKEY = "<ctrl>+<alt>+s"
