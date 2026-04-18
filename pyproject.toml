@@ -13,11 +13,6 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
 ]
-
-[project.urls]
-Homepage = "https://github.com/simonteague6/aloud-tts"
-Issues = "https://github.com/simonteague6/aloud-tts/issues"
-
 dependencies = [
     "rumps>=0.4.0",
     "mlx-audio>=0.4.2",
@@ -26,6 +21,10 @@ dependencies = [
     "pyperclip>=1.11.0",
     "misaki[en]>=0.9.4",
 ]
+
+[project.urls]
+Homepage = "https://github.com/simonteague6/aloud-tts"
+Issues = "https://github.com/simonteague6/aloud-tts/issues"
 
 [project.scripts]
 aloud-tts = "tts_app.menubar.app:run"
