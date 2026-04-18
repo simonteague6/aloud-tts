@@ -1,4 +1,4 @@
-# tts-app
+# aloud-tts
 
 A macOS menu bar text-to-speech tool. Select text anywhere → press **⌃⌥S** → a local Kokoro-82M model (via MLX) speaks it aloud.
 
@@ -9,24 +9,45 @@ A macOS menu bar text-to-speech tool. Select text anywhere → press **⌃⌥S**
 
 ## Requirements
 
-- macOS on **Apple Silicon** (M1/M2/M3/M4) — MLX doesn't support Intel Macs
-- **Python 3.12** (not 3.13+)
-- [uv](https://docs.astral.sh/uv/getting-started/installation/) for dependency management
+- macOS 14+ (Sonoma) on **Apple Silicon** (M1/M2/M3/M4) — MLX doesn't support Intel Macs
 
 ## Install
 
+### Option A — curl (easiest)
+
 ```bash
-git clone https://github.com/simonteague6/tts-app.git
+curl -fsSL https://raw.githubusercontent.com/simonteague6/aloud-tts/main/install.sh | bash
+```
+
+Installs via `uv tool install`. Requires no Git clone.
+
+### Option B — Homebrew
+
+```bash
+brew tap simonteague6/aloud-tts
+brew install aloud-tts
+```
+
+### Option C — .app bundle
+
+Download `TTS.app.zip` from the [latest GitHub Release](https://github.com/simonteague6/aloud-tts/releases/latest), unzip, and drag `TTS.app` to `/Applications`. Right-click → Open the first time to bypass Gatekeeper.
+
+### Option D — from source (dev)
+
+Requires **Python 3.12** and [uv](https://docs.astral.sh/uv/getting-started/installation/).
+
+```bash
+git clone https://github.com/simonteague6/aloud-tts.git
 cd tts-app
 uv sync
 ```
 
-First run downloads the Kokoro model (~330 MB) into your Hugging Face cache.
+First launch downloads the Kokoro model (~330 MB) into your Hugging Face cache.
 
 ## Run the menu bar app
 
 ```bash
-uv run tts-app
+uv run aloud-tts
 ```
 
 ### Grant permissions (one-time)
@@ -61,9 +82,9 @@ Press the hotkey again during playback to stop. Press once more to speak a new s
 One-shot synthesis with no menu bar:
 
 ```bash
-uv run tts-app-cli "Hello world"                     # speak and exit
-uv run tts-app-cli - < article.txt                   # read text from stdin
-uv run tts-app-cli "save it" --out out.wav --no-play # generate WAV only
+uv run aloud-tts-cli "Hello world"                     # speak and exit
+uv run aloud-tts-cli - < article.txt                   # read text from stdin
+uv run aloud-tts-cli "save it" --out out.wav --no-play # generate WAV only
 ```
 
 ## Configuration

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-HOTKEY = "<ctrl>+<alt>+s"
+HOTKEY = "<alt>+space"
 
 MODEL = "prince-canuma/Kokoro-82M"
 VOICE = "af_heart"

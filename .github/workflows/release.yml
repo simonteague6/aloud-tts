@@ -1,0 +1,69 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+      - run: uv build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  pypi-publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+
+  github-release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true
+
+  # bump-formula:
+  #   needs: pypi-publish
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: mislav/bump-homebrew-formula-action@v3
+  #       with:
+  #         formula-name: aloud-tts
+  #         homebrew-tap: simonteague6/homebrew-aloud-tts
+  #         base-branch: main
+  #       env:
+  #         COMMITTER_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+
+  # py2app-bundle:
+  #   needs: build
+  #   runs-on: macos-14
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: astral-sh/setup-uv@v4
+  #     - run: uv run --with py2app python setup_app.py py2app
+  #     - run: zip -r dist/TTS.app.zip dist/TTS.app
+  #     - uses: softprops/action-gh-release@v2
+  #       with:
+  #         files: dist/TTS.app.zip
