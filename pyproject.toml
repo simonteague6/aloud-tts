@@ -1,6 +1,6 @@
 [project]
 name = "aloud-tts"
-version = "0.1.0"
+version = "0.1.1"
 description = "macOS menu bar text-to-speech powered by MLX Audio (Kokoro)"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -19,7 +19,11 @@ dependencies = [
     "soundfile>=0.12.1",
     "pynput>=1.8.1",
     "pyperclip>=1.11.0",
-    "misaki[en]>=0.9.4",
+    "misaki>=0.9.4",
+    "num2words>=0.5.14",
+    "phonemizer-fork>=3.3.2",
+    "espeakng-loader>=0.2.4",
+    "spacy>=3.8.0",
 ]
 
 [project.urls]
